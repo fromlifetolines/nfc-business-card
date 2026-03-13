@@ -3,136 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Howard Huang | 頂級數位名片</title>
+  <title>Howard Huang | 數位名片</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* 全域字體與背景設定 */
     body { 
-      font-family: 'Inter', sans-serif; 
-      background-color: #030303; 
-      color: #fff; 
-    }
-    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
-    
-    /* 頂級次世代毛玻璃面板 */
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(32px);
-      -webkit-backdrop-filter: blur(32px);
-      box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+      font-family: 'Inter', 'Noto Sans TC', sans-serif; 
+      background-color: #000000; /* 極致純黑背景 */
+      color: #ffffff; 
+      -webkit-font-smoothing: antialiased;
     }
     
-    /* 賽博龐克微光暈 */
-    .cyber-glow {
-      position: absolute;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(0,240,255,0.15) 0%, rgba(0,0,0,0) 70%);
-      top: -50px; right: -50px;
-      border-radius: 50%;
-      pointer-events: none;
+    /* Bento 卡片通用設定 */
+    .bento-card {
+      background-color: #151515;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
     }
-    
-    /* 核心 CTA 按鈕精緻動態 */
-    .btn-primary {
-      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    .bento-card:hover {
+      transform: scale(0.98);
+      background-color: #1a1a1a;
     }
-    .btn-primary:hover {
-      background: rgba(0, 240, 255, 0.1);
-      border-color: rgba(0, 240, 255, 0.8);
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
-      transform: translateY(-2px);
+
+    /* 主按鈕設定 */
+    .primary-btn {
+      background-color: #ffffff;
+      color: #000000;
+      border-radius: 100px;
+      transition: all 0.3s ease;
     }
-    
-    /* 社群按鈕微互動 */
-    .social-btn {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    .primary-btn:active {
+      transform: scale(0.96);
+      background-color: #e5e5e5;
     }
-    .social-btn:hover {
-      transform: translateY(-4px) scale(1.05);
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.3);
-      color: #00F0FF;
-    }
-    
-    /* 進場優雅動畫 */
-    .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
-    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
+
+    /* 進場動畫 */
+    .fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .d-1 { animation-delay: 0.1s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.3s; }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-5 relative overflow-hidden">
+
+<body class="min-h-screen flex justify-center sm:py-10">
   
-  <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-blue-900/10 rounded-full blur-[120px]"></div>
-  <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-purple-900/10 rounded-full blur-[120px]"></div>
+  <main class="w-full max-w-[420px] bg-[#0a0a0a] sm:rounded-[40px] sm:border sm:border-white/10 sm:shadow-2xl overflow-hidden relative pb-10">
+    
+    <div class="h-48 w-full bg-zinc-900 relative">
+      <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-60" alt="cover">
+    </div>
 
-  <main class="glass-panel w-full max-w-[380px] rounded-[32px] p-8 relative overflow-hidden fade-in-up">
-    <div class="cyber-glow"></div>
-
-    <div class="flex justify-center mb-6 fade-in-up delay-1">
-      <div class="relative w-28 h-28 rounded-full p-1 border border-white/10 bg-white/5">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300" alt="Avatar" class="w-full h-full rounded-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500">
-        <div class="absolute bottom-1 right-1 w-4 h-4 bg-green-400 border-2 border-[#050505] rounded-full shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
+    <div class="px-6 relative -mt-16 fade-up">
+      <div class="w-28 h-28 rounded-full border-4 border-[#0a0a0a] bg-zinc-800 overflow-hidden relative">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300" alt="Profile" class="w-full h-full object-cover">
       </div>
     </div>
 
-    <div class="text-center mb-8 fade-in-up delay-2">
-      <h1 class="text-3xl font-bold text-white mb-2 tracking-wide">Howard Huang</h1>
-      <p class="text-[#00F0FF] text-xs font-bold tracking-[0.2em] uppercase mb-4">資深平面設計師 / 品牌行銷專家</p>
-      <p class="text-gray-400 text-sm leading-relaxed px-2">「生活線條」主理人。<br>用設計與科技，重新定義您的品牌價值。</p>
+    <div class="px-6 mt-4 fade-up d-1">
+      <h1 class="text-2xl font-bold tracking-wide">Howard Huang</h1>
+      <p class="text-zinc-400 text-sm mt-1.5 font-medium tracking-wider">資深平面設計師 / 品牌戰略專家</p>
+      <p class="text-zinc-500 text-sm mt-3 leading-relaxed">主理「生活線條 From Life To Lines」。專注於用頂級的視覺設計與商業策略，重新定義品牌價值。</p>
     </div>
 
-    <div class="mb-8 fade-in-up delay-3">
-      <button onclick="downloadVCard()" class="btn-primary w-full py-4 rounded-2xl flex items-center justify-center gap-3 text-white font-semibold tracking-widest cursor-pointer">
-        <i class="fa-solid fa-address-card text-xl text-[#00F0FF]"></i>
-        一鍵存入通訊錄
+    <div class="px-6 mt-6 fade-up d-2">
+      <button onclick="downloadVCard()" class="primary-btn w-full py-4 font-bold text-[15px] flex justify-center items-center gap-2 cursor-pointer shadow-[0_0_40px_rgba(255,255,255,0.1)]">
+        <i class="fa-solid fa-arrow-down flex items-center justify-center bg-black text-white rounded-full w-6 h-6 text-xs"></i>
+        儲存至通訊錄
       </button>
     </div>
 
-    <div class="flex justify-center gap-5 fade-in-up delay-3">
-      <a href="tel:+886978751607" class="social-btn w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-gray-400">
-        <i class="fa-solid fa-phone text-lg"></i>
+    <div class="px-6 mt-6 grid grid-cols-2 gap-3 fade-up d-3">
+      
+      <a href="tel:+886978751607" class="bento-card p-5 flex flex-col gap-3">
+        <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-white">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <div>
+          <p class="text-zinc-500 text-xs font-medium mb-0.5">Mobile</p>
+          <p class="text-sm font-semibold tracking-wide">撥打電話</p>
+        </div>
       </a>
-      <a href="mailto:howardhuang720818@gmail.com" class="social-btn w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-gray-400">
-        <i class="fa-solid fa-envelope text-lg"></i>
+
+      <a href="mailto:howardhuang720818@gmail.com" class="bento-card p-5 flex flex-col gap-3">
+        <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-white">
+          <i class="fa-regular fa-envelope"></i>
+        </div>
+        <div>
+          <p class="text-zinc-500 text-xs font-medium mb-0.5">Email</p>
+          <p class="text-sm font-semibold tracking-wide">寄送郵件</p>
+        </div>
       </a>
-      <a href="https://instagram.com" target="_blank" class="social-btn w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-gray-400">
-        <i class="fa-brands fa-instagram text-xl"></i>
+
+      <a href="https://你的網站.com" target="_blank" class="bento-card col-span-2 p-5 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-white">
+            <i class="fa-solid fa-globe text-lg"></i>
+          </div>
+          <div>
+            <p class="text-sm font-semibold">生活線條 官方網站</p>
+            <p class="text-zinc-500 text-xs font-medium mt-0.5">Portfolio & Services</p>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-right text-zinc-600 text-sm"></i>
       </a>
-      <a href="https://github.com" target="_blank" class="social-btn w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-gray-400">
-        <i class="fa-solid fa-globe text-lg"></i>
+
+      <a href="https://instagram.com/" target="_blank" class="bento-card col-span-2 p-5 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-white">
+            <i class="fa-brands fa-instagram text-xl"></i>
+          </div>
+          <div>
+            <p class="text-sm font-semibold">Instagram</p>
+            <p class="text-zinc-500 text-xs font-medium mt-0.5">@fromlifetolines</p>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-right text-zinc-600 text-sm"></i>
       </a>
+
     </div>
-  </main>
+
+    </main>
 
   <script>
     function downloadVCard() {
-      // 這裡是你客製化客戶通訊錄資料的地方
-      const vcardData = `BEGIN:VCARD
-VERSION:3.0
-FN:Howard Huang
-ORG:From Life To Lines 生活線條
-TITLE:資深平面設計師 / 品牌行銷專家
-TEL;TYPE=CELL:+886978751607
-EMAIL:howardhuang720818@gmail.com
-URL:https://你的網站.com
-END:VCARD`;
-
-      // 將資料轉換為檔案並觸發下載
+      // 這裡修改下載下來的通訊錄資料
+      const vcardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Howard Huang\nORG:From Life To Lines 生活線條\nTITLE:資深平面設計師 / 品牌戰略專家\nTEL;TYPE=CELL:+886978751607\nEMAIL:howardhuang720818@gmail.com\nURL:https://你的網站.com\nEND:VCARD`;
       const blob = new Blob([vcardData], { type: "text/vcard;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'Howard_Huang.vcf'); // 下載下來的檔案名稱
+      link.setAttribute('download', 'Howard_Huang.vcf');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
