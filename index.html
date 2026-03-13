@@ -11,66 +11,58 @@
   
   <style>
     /* 消除手機端預設的點擊反白框 */
-    * {
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { -webkit-tap-highlight-color: transparent; }
     
     body { 
       font-family: 'Inter', 'Noto Sans TC', sans-serif; 
-      background-color: #050505; 
+      background-color: #050505; /* 深邃黑底 */
       color: #ffffff; 
       -webkit-font-smoothing: antialiased;
     }
     
-    /* 100% 手機支援的背景氣氛光暈 */
-    .bg-fx {
-      position: fixed;
-      inset: 0;
-      background: 
-        radial-gradient(circle at 10% 60%, rgba(59, 130, 246, 0.25) 0%, transparent 55%),
-        radial-gradient(circle at 90% 85%, rgba(147, 51, 234, 0.25) 0%, transparent 55%);
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    /* 頂級毛玻璃 Bento 卡片 (加入頂部高光折射邊緣) */
+    /* 頂級毛玻璃 Bento 卡片 */
     .glass-bento {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-top: 1px solid rgba(255, 255, 255, 0.2); /* 模擬玻璃頂部受光 */
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     
-    /* Hover 與 Active 實體物理互動感 (加速動畫反應) */
+    /* Hover 與 Active(按壓) 的實體互動感 */
     .interactive-card {
       transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
     }
-    /* 滑鼠懸停 (電腦端) */
     @media (hover: hover) {
       .interactive-card:hover {
-        background: rgba(255, 255, 255, 0.07);
+        background: rgba(255, 255, 255, 0.06);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        border-top: 1px solid rgba(255, 255, 255, 0.3);
         transform: translateY(-2px);
       }
     }
-    /* 手指按壓瞬間 (行動端真實回饋) */
+    /* 手指按壓瞬間內縮 */
     .interactive-card:active {
       transform: scale(0.92) !important;
       background: rgba(255, 255, 255, 0.1);
     }
 
-    /* 核心主按鈕設定 */
+    /* 主按鈕設定 */
     .primary-btn {
-      background: linear-gradient(135deg, #ffffff 0%, #d4d4d4 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
       color: #000000;
       border-radius: 100px;
       transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
-      box-shadow: 0 8px 20px rgba(255,255,255,0.15);
+      box-shadow: 0 10px 20px rgba(255,255,255,0.1);
     }
+    @media (hover: hover) {
+      .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 25px rgba(255,255,255,0.2);
+      }
+    }
+    /* 主按鈕手指按壓瞬間內縮 */
     .primary-btn:active {
       transform: scale(0.94) !important;
       box-shadow: 0 2px 10px rgba(255,255,255,0.1);
@@ -81,35 +73,48 @@
     .fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
     .d-1 { animation-delay: 0.1s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.3s; }
+
+    /* 背景氣氛光暈 */
+    .ambient-glow {
+      position: fixed; width: 80vw; height: 80vw; border-radius: 50%;
+      filter: blur(100px); z-index: -1; pointer-events: none; opacity: 0.5;
+    }
   </style>
 </head>
 
 <body class="min-h-screen flex justify-center sm:py-10 relative overflow-x-hidden" ontouchstart="">
   
-  <div class="bg-fx"></div>
+  <div class="ambient-glow bg-blue-900/20 top-[-20%] left-[-20%]"></div>
+  <div class="ambient-glow bg-purple-900/20 bottom-[-20%] right-[-20%]"></div>
 
   <main class="w-full max-w-[420px] sm:rounded-[40px] sm:border sm:border-white/10 sm:shadow-2xl overflow-hidden relative pb-12 z-10">
     
     <div class="h-56 w-full relative">
       <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-70" alt="cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
     </div>
 
     <div class="px-6 relative -mt-20 fade-up flex justify-between items-end">
+      
       <div class="relative inline-block">
-        <div class="w-28 h-28 rounded-[2rem] border-4 border-[#050505] bg-zinc-800 overflow-hidden shadow-2xl relative z-10">
+        <div class="w-28 h-28 rounded-[2rem] border-4 border-[#050505] bg-zinc-800 overflow-hidden shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
           <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300" alt="Profile" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full border-4 border-[#050505] bg-white flex items-center justify-center overflow-hidden shadow-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" class="w-5 h-5 object-contain" alt="Company Logo">
         </div>
       </div>
 
-      <button onclick="openQR()" class="w-12 h-12 rounded-full glass-bento interactive-card flex items-center justify-center text-white/90 mb-2 cursor-pointer z-20">
+      <button onclick="openQR()" class="w-12 h-12 rounded-full glass-bento interactive-card flex items-center justify-center text-white/80 mb-2 cursor-pointer">
         <i class="fa-solid fa-qrcode text-xl"></i>
       </button>
+
     </div>
 
     <div class="px-6 mt-5 fade-up d-1">
-      <h1 class="text-[28px] font-bold tracking-tight mb-1">Howard Huang</h1>
-      <p class="text-zinc-400 text-sm font-medium tracking-wider uppercase">資深平面設計師 / 品牌戰略專家</p>
+      <h1 class="text-3xl font-bold tracking-tight mb-1">Howard Huang</h1>
+      <p class="text-zinc-400 text-sm font-medium tracking-wide uppercase">資深平面設計師 / 品牌戰略專家</p>
       <p class="text-zinc-400 text-[15px] mt-4 leading-relaxed font-light">
         主理「生活線條 From Life To Lines」。專注於用頂級的視覺設計與商業策略，重新定義品牌價值。
       </p>
@@ -130,7 +135,7 @@
         </div>
         <div>
           <p class="text-white/50 text-[11px] font-medium uppercase tracking-wider mb-1">Mobile</p>
-          <p class="text-sm font-semibold tracking-wide text-white/95">撥打電話</p>
+          <p class="text-sm font-semibold tracking-wide text-white/90">撥打電話</p>
         </div>
       </a>
 
@@ -140,7 +145,7 @@
         </div>
         <div>
           <p class="text-white/50 text-[11px] font-medium uppercase tracking-wider mb-1">Email</p>
-          <p class="text-sm font-semibold tracking-wide text-white/95">寄送郵件</p>
+          <p class="text-sm font-semibold tracking-wide text-white/90">寄送郵件</p>
         </div>
       </a>
 
@@ -150,7 +155,7 @@
             <i class="fa-solid fa-globe text-lg"></i>
           </div>
           <div>
-            <p class="text-[15px] font-semibold text-white/95">生活線條 官方網站</p>
+            <p class="text-[15px] font-semibold text-white/90">生活線條 官方網站</p>
             <p class="text-white/50 text-xs font-medium mt-1 uppercase tracking-wider">Portfolio</p>
           </div>
         </div>
@@ -163,7 +168,7 @@
             <i class="fa-brands fa-instagram text-xl"></i>
           </div>
           <div>
-            <p class="text-[15px] font-semibold text-white/95">Instagram</p>
+            <p class="text-[15px] font-semibold text-white/90">Instagram</p>
             <p class="text-white/50 text-xs font-medium mt-1 uppercase tracking-wider">Social</p>
           </div>
         </div>
@@ -171,7 +176,7 @@
       </a>
 
     </div>
-    </main>
+  </main>
 
   <div id="qrModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="glass-bento p-8 flex flex-col items-center max-w-[300px] w-full mx-4 transform scale-95 transition-transform duration-300" id="qrCard">
@@ -179,7 +184,7 @@
       <div class="bg-white p-3 rounded-2xl mb-6 shadow-2xl">
         <img id="qrImage" src="" alt="QR Code" class="w-48 h-48">
       </div>
-      <button onclick="closeQR()" class="w-full py-3 rounded-xl bg-white/10 active:scale-95 active:bg-white/20 text-white font-medium transition-all duration-150">
+      <button onclick="closeQR()" class="w-full py-3 rounded-xl bg-white/10 interactive-card text-white font-medium">
         關閉視窗
       </button>
     </div>
