@@ -2,70 +2,141 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>數位名片</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Howard Huang | 頂級數位名片</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* 這裡負責科技感動畫與毛玻璃特效 */
-    body { background-color: #0A0A0A; color: white; margin: 0; overflow: hidden; font-family: sans-serif; }
+    /* 全域字體與背景設定 */
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: #030303; 
+      color: #fff; 
+    }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
     
-    .glass-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    /* 頂級次世代毛玻璃面板 */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
     }
     
-    /* 浮現動畫 */
-    .animate-float-up { animation: floatUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    @keyframes floatUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* 賽博龐克微光暈 */
+    .cyber-glow {
+      position: absolute;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(0,240,255,0.15) 0%, rgba(0,0,0,0) 70%);
+      top: -50px; right: -50px;
+      border-radius: 50%;
+      pointer-events: none;
     }
     
-    /* 按鈕掃光動畫 */
-    .shimmer-btn { position: relative; overflow: hidden; }
-    .shimmer-btn::after {
-      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
-      transform: skewX(-20deg); animation: shimmer 2.5s infinite;
+    /* 核心 CTA 按鈕精緻動態 */
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    @keyframes shimmer { 100% { left: 200%; } }
+    .btn-primary:hover {
+      background: rgba(0, 240, 255, 0.1);
+      border-color: rgba(0, 240, 255, 0.8);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+      transform: translateY(-2px);
+    }
     
-    /* 背景科技光暈 */
-    .bg-glow-1 { position: absolute; top: -20%; left: -10%; width: 70vw; height: 70vw; background: rgba(0, 240, 255, 0.15); filter: blur(100px); border-radius: 50%; z-index: -1;}
-    .bg-glow-2 { position: absolute; bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: rgba(138, 43, 226, 0.15); filter: blur(100px); border-radius: 50%; z-index: -1;}
+    /* 社群按鈕微互動 */
+    .social-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .social-btn:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.3);
+      color: #00F0FF;
+    }
+    
+    /* 進場優雅動畫 */
+    .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex items-center justify-center p-5 relative overflow-hidden">
   
-  <div class="bg-glow-1"></div>
-  <div class="bg-glow-2"></div>
+  <div class="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-blue-900/10 rounded-full blur-[120px]"></div>
+  <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] bg-purple-900/10 rounded-full blur-[120px]"></div>
 
-  <main class="glass-card w-full max-w-[380px] p-8 rounded-[2rem] shadow-2xl flex flex-col items-center text-center animate-float-up relative z-10">
+  <main class="glass-panel w-full max-w-[380px] rounded-[32px] p-8 relative overflow-hidden fade-in-up">
+    <div class="cyber-glow"></div>
 
-    <div class="w-24 h-24 rounded-full overflow-hidden border border-[#00F0FF]/30 p-1 mb-6 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
-      <img src="https://i.pravatar.cc/150?u=king" alt="照片" class="w-full h-full rounded-full object-cover">
+    <div class="flex justify-center mb-6 fade-in-up delay-1">
+      <div class="relative w-28 h-28 rounded-full p-1 border border-white/10 bg-white/5">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300" alt="Avatar" class="w-full h-full rounded-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500">
+        <div class="absolute bottom-1 right-1 w-4 h-4 bg-green-400 border-2 border-[#050505] rounded-full shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
+      </div>
     </div>
 
-    <h1 class="text-3xl font-bold tracking-widest mb-2">王大明</h1>
-    <p class="text-[#00F0FF] text-sm tracking-widest mb-8">王牌金牌業務 / 房地產顧問</p>
-
-    <a href="#" class="shimmer-btn w-full bg-[#050505] border border-[#00F0FF] text-[#00F0FF] rounded-xl py-3.5 px-6 font-bold tracking-wider flex items-center justify-center gap-2 mb-8 hover:bg-[#00F0FF] hover:text-black transition-colors duration-300">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-      點擊存入通訊錄
-    </a>
-
-    <div class="flex gap-5 w-full justify-center">
-      <a href="https://你的網站.com" class="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/20 transition-all hover:scale-110">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-      </a>
-      <a href="mailto:king@example.com" class="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/20 transition-all hover:scale-110">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-      </a>
+    <div class="text-center mb-8 fade-in-up delay-2">
+      <h1 class="text-3xl font-bold text-white mb-2 tracking-wide">Howard Huang</h1>
+      <p class="text-[#00F0FF] text-xs font-bold tracking-[0.2em] uppercase mb-4">資深平面設計師 / 品牌行銷專家</p>
+      <p class="text-gray-400 text-sm leading-relaxed px-2">「生活線條」主理人。<br>用設計與科技，重新定義您的品牌價值。</p>
     </div>
 
-    </main>
+    <div class="mb-8 fade-in-up delay-3">
+      <button onclick="downloadVCard()" class="btn-primary w-full py-4 rounded-2xl flex items-center justify-center gap-3 text-white font-semibold tracking-widest cursor-pointer">
+        <i class="fa-solid fa-address-card text-xl text-[#00F0FF]"></i>
+        一鍵存入通訊錄
+      </button>
+    </div>
+
+    <div class="flex justify-center gap-5 fade-in-up delay-3">
+      <a href="tel:+886978751607" class="social-btn w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-gray-400">
+        <i class="fa-solid fa-phone text-lg"></i>
+      </a>
+      <a href="mailto:howardhuang720818@gmail.com" class="social-btn w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-gray-400">
+        <i class="fa-solid fa-envelope text-lg"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" class="social-btn w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-gray-400">
+        <i class="fa-brands fa-instagram text-xl"></i>
+      </a>
+      <a href="https://github.com" target="_blank" class="social-btn w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-gray-400">
+        <i class="fa-solid fa-globe text-lg"></i>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    function downloadVCard() {
+      // 這裡是你客製化客戶通訊錄資料的地方
+      const vcardData = `BEGIN:VCARD
+VERSION:3.0
+FN:Howard Huang
+ORG:From Life To Lines 生活線條
+TITLE:資深平面設計師 / 品牌行銷專家
+TEL;TYPE=CELL:+886978751607
+EMAIL:howardhuang720818@gmail.com
+URL:https://你的網站.com
+END:VCARD`;
+
+      // 將資料轉換為檔案並觸發下載
+      const blob = new Blob([vcardData], { type: "text/vcard;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Howard_Huang.vcf'); // 下載下來的檔案名稱
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
 </body>
 </html>
