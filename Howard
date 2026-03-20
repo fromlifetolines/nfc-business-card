@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <title>Howard Huang | 頂級數位名片</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* 消除手機端預設的點擊反白框 */
+    * { -webkit-tap-highlight-color: transparent; }
+    
+    body { 
+      font-family: 'Inter', 'Noto Sans TC', sans-serif; 
+      background-color: #050505; /* 深邃黑底 */
+      color: #ffffff; 
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* 頂級毛玻璃 Bento 卡片 */
+    .glass-bento {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 24px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    /* Hover 與 Active(按壓) 的實體互動感 */
+    .interactive-card {
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+    }
+    @media (hover: hover) {
+      .interactive-card:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+      }
+    }
+    /* 手指按壓瞬間內縮 */
+    .interactive-card:active {
+      transform: scale(0.92) !important;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* 主按鈕設定 */
+    .primary-btn {
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+      color: #000000;
+      border-radius: 100px;
+      transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+      box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+    }
+    @media (hover: hover) {
+      .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 25px rgba(255,255,255,0.2);
+      }
+    }
+    /* 主按鈕手指按壓瞬間內縮 */
+    .primary-btn:active {
+      transform: scale(0.94) !important;
+      box-shadow: 0 2px 10px rgba(255,255,255,0.1);
+      background: #e5e5e5;
+    }
+
+    /* 進場動畫 */
+    .fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .d-1 { animation-delay: 0.1s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.3s; }
+
+    /* 背景氣氛光暈 */
+    .ambient-glow {
+      position: fixed; width: 80vw; height: 80vw; border-radius: 50%;
+      filter: blur(100px); z-index: -1; pointer-events: none; opacity: 0.5;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex justify-center sm:py-10 relative overflow-x-hidden" ontouchstart="">
+  
+  <div class="ambient-glow bg-blue-900/20 top-[-20%] left-[-20%]"></div>
+  <div class="ambient-glow bg-purple-900/20 bottom-[-20%] right-[-20%]"></div>
+
+  <main class="w-full max-w-[420px] sm:rounded-[40px] sm:border sm:border-white/10 sm:shadow-2xl overflow-hidden relative pb-12 z-10">
+    
+    <div class="h-56 w-full relative">
+      <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-70" alt="cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
+    </div>
+
+    <div class="px-6 relative -mt-20 fade-up flex justify-between items-end">
+      
+      <div class="relative inline-block">
+        <div class="w-28 h-28 rounded-[2rem] border-4 border-[#050505] bg-zinc-800 overflow-hidden shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300" alt="Profile" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full border-4 border-[#050505] bg-white flex items-center justify-center overflow-hidden shadow-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" class="w-5 h-5 object-contain" alt="Company Logo">
+        </div>
+        </div>
+
+      <button onclick="openQR()" class="w-12 h-12 rounded-full glass-bento interactive-card flex items-center justify-center text-white/80 mb-2 cursor-pointer">
+        <i class="fa-solid fa-qrcode text-xl"></i>
+      </button>
+
+    </div>
+
+    <div class="px-6 mt-5 fade-up d-1">
+      <h1 class="text-3xl font-bold tracking-tight mb-1">Howard Huang</h1>
+      
+      <p class="text-zinc-400 text-sm font-medium tracking-wide uppercase">資深平面設計師 / 品牌戰略專家</p>
+      
+      <p class="text-zinc-400 text-[15px] mt-4 leading-relaxed font-light">
+        主理「生活線條 From Life To Lines」。專注於用頂級的視覺設計與商業策略，重新定義品牌價值。
+      </p>
+    </div>
+
+    <div class="px-6 mt-8 fade-up d-2">
+      <button onclick="downloadVCard()" class="primary-btn w-full py-4 font-bold text-[16px] flex justify-center items-center gap-3 cursor-pointer">
+        <i class="fa-solid fa-address-book text-lg"></i>
+        一鍵儲存通訊錄
+      </button>
+    </div>
+
+    <div class="px-6 mt-6 grid grid-cols-2 gap-4 fade-up d-3">
+      
+      <a href="tel:+886978751607" class="glass-bento interactive-card p-5 flex flex-col gap-4">
+        <div class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <div>
+          <p class="text-white/50 text-[11px] font-medium uppercase tracking-wider mb-1">Mobile</p>
+          <p class="text-sm font-semibold tracking-wide text-white/90">撥打電話</p>
+        </div>
+      </a>
+
+      <a href="mailto:howardhuang720818@gmail.com" class="glass-bento interactive-card p-5 flex flex-col gap-4">
+        <div class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white">
+          <i class="fa-regular fa-envelope"></i>
+        </div>
+        <div>
+          <p class="text-white/50 text-[11px] font-medium uppercase tracking-wider mb-1">Email</p>
+          <p class="text-sm font-semibold tracking-wide text-white/90">寄送郵件</p>
+        </div>
+      </a>
+
+      <a href="https://你的網站.com" target="_blank" class="glass-bento interactive-card col-span-2 p-5 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white">
+            <i class="fa-solid fa-globe text-lg"></i>
+          </div>
+          <div>
+            <p class="text-[15px] font-semibold text-white/90">生活線條 官方網站</p>
+            <p class="text-white/50 text-xs font-medium mt-1 uppercase tracking-wider">Portfolio</p>
+          </div>
+        </div>
+        <i class="fa-solid fa-arrow-right -rotate-45 text-white/30 text-sm"></i>
+      </a>
+
+      <a href="https://instagram.com/" target="_blank" class="glass-bento interactive-card col-span-2 p-5 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white">
+            <i class="fa-brands fa-instagram text-xl"></i>
+          </div>
+          <div>
+            <p class="text-[15px] font-semibold text-white/90">Instagram</p>
+            <p class="text-white/50 text-xs font-medium mt-1 uppercase tracking-wider">Social</p>
+          </div>
+        </div>
+        <i class="fa-solid fa-arrow-right -rotate-45 text-white/30 text-sm"></i>
+      </a>
+
+    </div>
+  </main>
+
+  <div id="qrModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="glass-bento p-8 flex flex-col items-center max-w-[300px] w-full mx-4 transform scale-95 transition-transform duration-300" id="qrCard">
+      <h2 class="text-xl font-bold mb-6 text-white tracking-wide">掃描加入聯絡人</h2>
+      <div class="bg-white p-3 rounded-2xl mb-6 shadow-2xl">
+        <img id="qrImage" src="" alt="QR Code" class="w-48 h-48">
+      </div>
+      <button onclick="closeQR()" class="w-full py-3 rounded-xl bg-white/10 interactive-card text-white font-medium">
+        關閉視窗
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function openQR() {
+      const modal = document.getElementById('qrModal');
+      const qrCard = document.getElementById('qrCard');
+      const qrImage = document.getElementById('qrImage');
+      const currentUrl = window.location.href;
+      qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(currentUrl)}&margin=0`;
+      modal.classList.remove('pointer-events-none');
+      modal.classList.replace('opacity-0', 'opacity-100');
+      qrCard.classList.replace('scale-95', 'scale-100');
+    }
+
+    function closeQR() {
+      const modal = document.getElementById('qrModal');
+      const qrCard = document.getElementById('qrCard');
+      modal.classList.replace('opacity-100', 'opacity-0');
+      qrCard.classList.replace('scale-100', 'scale-95');
+      setTimeout(() => { modal.classList.add('pointer-events-none'); }, 300);
+    }
+
+    document.getElementById('qrModal').addEventListener('click', function(e) {
+      if (e.target === this) closeQR();
+    });
+
+    function downloadVCard() {
+      // ✏️修改區 12：這是客戶下載存入手機的「通訊錄隱藏資料」
+      // 請小心替換各項目冒號 (:) 後面的資料。注意不要刪除到 \n (換行符號)
+      // FN=姓名, ORG=公司名, TITLE=職稱, TEL;TYPE=CELL=電話號碼, EMAIL=信箱, URL=網址
+      const vcardData = `BEGIN:VCARD\nVERSION:3.0\nFN:Howard Huang\nORG:From Life To Lines 生活線條\nTITLE:資深平面設計師 / 品牌戰略專家\nTEL;TYPE=CELL:+886978751607\nEMAIL:howardhuang720818@gmail.com\nURL:https://你的網站.com\nEND:VCARD`;
+      
+      const blob = new Blob([vcardData], { type: "text/vcard;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      
+      // ✏️修改區 13：客戶下載到手機裡的「通訊錄檔案名稱」
+      link.setAttribute('download', 'Howard_Huang.vcf');
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
